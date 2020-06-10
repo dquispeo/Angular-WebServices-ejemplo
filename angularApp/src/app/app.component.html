@@ -1,0 +1,54 @@
+<div style="text-align:center">
+  <a class="btn btn-warning" routerLink="/productos">Productos</a> - 
+  <a class="btn btn-warning" routerLink="/acercade">Acerca de</a>
+  <br><br>
+  <div style="border: 1px solid red">
+    <br>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<br>
+<div>
+  <div class="alert alert-success" role="alert">
+    <h3 class="alert-heading">Administración de artículos</h3>
+  </div>
+    <table class="table table-hober table-striped" border="1" *ngIf="hayRegistros(); else sinproductos">
+      <thead class="thead-dark">
+        <tr>
+          <td>Codigo</td>
+          <td>Nombre</td>
+          <td>Precio</td>
+          <td>Borrar</td>
+          <td>Seleccionar</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let producto of lista">
+        <td>{{producto._id}}</td>
+        <td>{{producto.descripcion}}</td>
+        <td>{{producto.precio}}</td>
+        <td><button (click)="eliminar(producto._id)">Borrar?</button></td>
+        <td><button (click)="mostrar(producto._id)">Seleccionar</button></td>
+      </tr>
+    </tbody>
+    </table>
+    <ng-template #sinproductos><p>No hay productos</p></ng-template>
+    <br>
+    <div>
+      <form>
+        <div class="alert alert-success" role="alert">
+          <h3 class="alert-heading">Datos</h3>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" id="descripcion" [(ngModel)]="prod.descripcion" />
+        </div>
+        <div class="form-group">
+          <label for="precio">Precio</label>
+          <input type="number" step="any" class="form-control" id="precio" [(ngModel)]="prod.precio" />
+        </div>
+        <button class="btn btn-success" (click)="nuevo()">Agregar</button>
+        <button class="btn btn-primary" (click)="actualizar()">Modificar</button>
+      </form>
+    </div>
+</div>
